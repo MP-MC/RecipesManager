@@ -21,18 +21,17 @@ public abstract class Recipe {
     @Getter @Setter
     private String permission;
 
-    protected final HashMap<Integer, Character> matrixMap = new HashMap<>();
     protected final HashMap<Character, ItemStack> ingredients = new HashMap<>();
     protected final HashMap<Integer, ItemStack> matrix = new HashMap<>();
+    protected String[] shape;
 
     protected Recipe(String id, ItemStack result) {
         this.id = new NamespacedKey(plugin, id);
         this.result = result;
     }
 
-    public Recipe setSlot(int slot, char ingredientKey) {
-        matrixMap.put(slot, ingredientKey);
-        return this;
+    public void setShape(String... shape) {
+        this.shape = shape;
     }
 
     public void setIngredient(char key, ItemStack item) {

@@ -3,8 +3,6 @@ package tk.empee.recipesManager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
-import java.util.Map;
-
 public class WorkbenchRecipe extends Recipe {
 
     public WorkbenchRecipe(String id, ItemStack result) {
@@ -45,33 +43,20 @@ public class WorkbenchRecipe extends Recipe {
     }
 
     org.bukkit.inventory.Recipe getRecipe() {
-
         ShapedRecipe recipe = new ShapedRecipe(id, result);
-
-        int slot = 0;
-        String[] shape = new String[3];
-        for(int i=0; i<3; i++) {
-            StringBuilder row = new StringBuilder();
-            for(int j=0; j<3; j++) {
-                Character character = matrixMap.get(slot);
-                if(character != null) {
-                    row.append(character);
-                } else {
-                    row.append(" ");
-                }
-                slot += 1;
-            }
-            shape[i] = row.toString();
-        }
-
         recipe.shape(shape);
 
+        int slot = 0;
+        for(String row : shape) {
+            for(int i=0; i<row.length(); i++) {
+                char ingredientKey = row.charAt(i);
+                if(ingredientKey != ' ') {
+                    ItemStack ingredient = ingredients.get(ingredientKey);
+                    recipe.setIngredient(ingredientKey, ingredient.getType());
+                    matrix.put(slot, ingredient);
+                }
 
-        for(Map.Entry<Integer, Character> slotEntry : matrixMap.entrySet()) {
-            ItemStack ingredient = ingredients.get(slotEntry.getValue());
-            if(ingredient != null) {
-                recipe.setIngredient(slotEntry.getValue(), ingredient.getType());
-                this.matrix.put(slotEntry.getKey(), ingredient);
+                slot += 1;
             }
         }
 
