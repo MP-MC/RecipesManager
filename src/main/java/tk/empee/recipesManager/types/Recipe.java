@@ -1,4 +1,4 @@
-package tk.empee.recipesManager;
+package tk.empee.recipesManager.types;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Recipe {
 
@@ -48,9 +50,9 @@ public abstract class Recipe {
     public abstract void updateMatrix(ItemStack[] matrix);
 
 
-    HashMap<Integer, ItemStack> getMatrix() {
-        return matrix;
+    public Map<Integer, ItemStack> getMatrix() {
+        return Collections.unmodifiableMap(matrix);
     }
-    abstract org.bukkit.inventory.Recipe getRecipe();
+    public abstract org.bukkit.inventory.Recipe getRecipe();
 
 }

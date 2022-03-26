@@ -1,4 +1,4 @@
-package tk.empee.recipesManager;
+package tk.empee.recipesManager.types;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -42,7 +42,7 @@ public class WorkbenchRecipe extends Recipe {
 
     }
 
-    org.bukkit.inventory.Recipe getRecipe() {
+    public org.bukkit.inventory.Recipe getRecipe() {
         ShapedRecipe recipe = new ShapedRecipe(id, result);
         recipe.shape(shape);
 
