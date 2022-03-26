@@ -5,8 +5,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import tk.empee.recipesManager.listeners.WorkbenchListener;
+import tk.empee.recipesManager.types.Recipe;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 public final class RecipesManager {
@@ -22,17 +24,36 @@ public final class RecipesManager {
     }
 
     public void registerRecipe(Recipe recipe) {
-        if(Bukkit.getRecipe(recipe.getId()) != null){
-            plugin.getLogger().info("Unregistered recipe " + recipe.getId());
-            Bukkit.removeRecipe(recipe.getId());
-        }
+        unregisterRecipe(recipe);
 
         Bukkit.addRecipe(recipe.getRecipe());
         recipes.add(recipe);
         plugin.getLogger().info("Registered recipe " + recipe.getId());
     }
 
-    //Retrieve a recipe only looking the materials of the matrix
+    public void unregisterRecipe(Recipe recipe) {
+        recipes.remove(recipe);
+        if(Bukkit.getRecipe(recipe.getId()) != null){
+            Bukkit.removeRecipe(recipe.getId());
+            plugin.getLogger().info("Unregistered recipe " + recipe.getId());
+        }
+    }
+
+    public void unregisterRecipes() {
+        Iterator<Recipe> recipes = this.recipes.iterator();
+        while (recipes.hasNext()) {
+            Recipe recipe = recipes.next();
+            recipes.remove();
+            if(Bukkit.getRecipe(recipe.getId()) != null){
+                Bukkit.removeRecipe(recipe.getId());
+                plugin.getLogger().info("Unregistered recipe " + recipe.getId());
+            }
+        }
+    }
+
+    /**
+     * Retrieve a recipe only looking the materials of the matrix
+     */
     public Recipe getRecipe(ItemStack[] matrix) {
 
         Recipe value = null;
