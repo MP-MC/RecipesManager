@@ -53,6 +53,6 @@ public abstract class Recipe {
     public Map<Integer, ItemStack> getMatrix() {
         return Collections.unmodifiableMap(matrix);
     }
-    public abstract org.bukkit.inventory.Recipe getRecipe();
+    public abstract org.bukkit.inventory.Recipe buildRecipe();
 
 }

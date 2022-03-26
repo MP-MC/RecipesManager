@@ -26,7 +26,7 @@ public final class RecipesManager {
     public void registerRecipe(Recipe recipe) {
         unregisterRecipe(recipe);
 
-        Bukkit.addRecipe(recipe.getRecipe());
+        Bukkit.addRecipe(recipe.buildRecipe());
         recipes.add(recipe);
         plugin.getLogger().info("Registered recipe " + recipe.getId());
     }

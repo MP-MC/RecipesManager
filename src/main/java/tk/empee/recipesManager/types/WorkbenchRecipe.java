@@ -42,7 +42,7 @@ public class WorkbenchRecipe extends Recipe {
 
     }
 
-    public org.bukkit.inventory.Recipe getRecipe() {
+    public org.bukkit.inventory.Recipe buildRecipe() {
         ShapedRecipe recipe = new ShapedRecipe(id, result);
         recipe.shape(shape);
 
