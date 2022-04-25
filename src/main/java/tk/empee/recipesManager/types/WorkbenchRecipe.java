@@ -3,7 +3,7 @@ package tk.empee.recipesManager.types;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
-public class WorkbenchRecipe extends Recipe {
+public final class WorkbenchRecipe extends Recipe {
 
     public WorkbenchRecipe(String id, ItemStack result) {
         super(id, result);

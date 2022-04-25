@@ -8,10 +8,10 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
-import tk.empee.recipesManager.Recipe;
 import tk.empee.recipesManager.RecipesManager;
+import tk.empee.recipesManager.types.Recipe;
 
-public class WorkbenchListener implements Listener {
+public final class WorkbenchListener implements Listener {
 
     private final RecipesManager recipesManager;
 
@@ -51,8 +51,8 @@ public class WorkbenchListener implements Listener {
             if (inventory.getResult() == null) {
                 event.setCancelled(true);
             } else if(click.isShiftClick() || click.isKeyboardClick()) {
+                //TODO: IMPLEMENT
                 event.setCancelled(true);
-                //TODO NOT IMPLEMENTED
             } else {
                 recipe.updateMatrix(matrix);
             }
