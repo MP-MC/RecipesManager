@@ -1,6 +1,40 @@
-<h1 align="center">RecipesManager</h1>
-<p align="center">This library has been tested only on 1.18.</p>
-<br>
-<p align="center">I <b>don't</b> recommend using it if you don't need
-a custom recipe that uses custom quantities, the reason is that currently
-to work it's abusing the recipe system</p>
+# RecipeManager
+RecipeManager is a simple library that
+allows you to customize the quantity of each ingredient
+needed for the crafting.
+
+## Features:
+ - [x] Workbench recipes
+ - [x] Recipes permission
+
+## TODOs
+ - [ ] Add support for other types of recipes
+ - [ ] Add support for Shift-Click crafting
+
+## How to use it
+```java
+public class MyPlugin extends JavaPlugin {
+    
+    @Override
+    public void onEnable() {
+        RecipesManager recipeManager = new RecipesManager(this);
+        recipeManager.registerRecipe(getRecipe());
+    }
+    
+    private Recipe getRecipe() {
+        ItemStack item = new ItemStack(Material.BREAD);
+        WorkbenchRecipe recipe = new WorkbenchRecipe("exampleID", item);
+
+        recipe.setShape(
+                "B B",
+                " B ",
+                "B B"
+        );
+
+        recipe.setIngredient('B', Material.BREAD, 64);
+
+        return recipe;
+    }
+    
+}
+```
